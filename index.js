@@ -31,20 +31,21 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     const servicesCollection = client.db('eleven').collection('services') ;
-    //const bookingCollection = client.db('eleven').collection('addtoy');
+    const bookingCollection = client.db('eleven').collection('bookings');
 
-    app.get('/services', async(req, res)=>{
-        const cursor = servicesCollection.find();
+    app.get('/bookings', async(req, res)=>{
+        const cursor = bookingCollection.find();
         const result = await cursor.toArray();
         res.send(result)
     })
 
-  //   app.post('/addtoy', async (req, res) => {
-  //     const booking = req.body;
-  //     console.log(booking);
-  //     const result = await bookingCollection.insertOne(booking);
-  //     res.send(result);
-  // });
+
+    app.post('/bookings', async (req, res) => {
+      const booking = req.body;
+      console.log(booking);
+      const result = await bookingCollection.insertOne(booking);
+      res.send(result);
+  });
 
 
 

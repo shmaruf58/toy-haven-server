@@ -9,8 +9,10 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-//MongoDb.................
 
+
+
+//MongoDb.................
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.l9qr6yy.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -28,7 +30,6 @@ async function run() {
     //await client.connect();
     const bookingCollection = client.db("eleven").collection("bookings");
 
-  
     // bookings get by email
     app.get("/bookings", async (req, res) => {
       console.log(req.query.email);
@@ -47,7 +48,7 @@ async function run() {
       const result = await bookingCollection.insertOne(booking);
       res.send(result);
     });
-    
+
     //update
     app.patch("/bookings/:id", async (req, res) => {
       const id = req.params.id;
@@ -67,8 +68,6 @@ async function run() {
       const result = await coffeeCollection.updateOne(filter, toy, options);
       res.send(result);
     });
-
-
 
     //delete
     app.delete("/bookings/:id", async (req, res) => {

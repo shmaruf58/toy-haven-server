@@ -28,12 +28,7 @@ async function run() {
     //await client.connect();
     const bookingCollection = client.db("eleven").collection("bookings");
 
-    // app.get("/bookings", async (req, res) => {
-    //   const cursor = bookingCollection.find();
-    //   const result = await cursor.toArray();
-    //   res.send(result);
-    // });
-
+  
     // bookings get by email
     app.get("/bookings", async (req, res) => {
       console.log(req.query.email);

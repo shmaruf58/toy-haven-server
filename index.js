@@ -49,25 +49,25 @@ async function run() {
     });
 
      
-    // //update
-    // app.patch("/bookings/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   console.log(id);
-    //   const filter = { _id: new ObjectId(id) };
-    //   const options = { upsert: true };
-    //   const updatedtoy = req.body;
+    //update
+    app.patch("/bookings/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedtoy = req.body;
 
-    //   const toy = {
-    //     $set: {
-    //       price: updatedtoy.price,
-    //       quantity: updatedtoy.quantity,
-    //       desc: updatedtoy.desc,
-    //     },
-    //   };
+      const toy = {
+        $set: {
+          price: updatedtoy.price,
+          quantity: updatedtoy.quantity,
+          desc: updatedtoy.desc,
+        },
+      };
 
-    //   const result = await coffeeCollection.updateOne(filter, toy, options);
-    //   res.send(result);
-    // });
+      const result = await coffeeCollection.updateOne(filter, toy, options);
+      res.send(result);
+    });
 
 
 

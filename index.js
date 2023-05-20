@@ -47,8 +47,7 @@ async function run() {
       const result = await bookingCollection.insertOne(booking);
       res.send(result);
     });
-
-     
+    
     //update
     app.patch("/bookings/:id", async (req, res) => {
       const id = req.params.id;

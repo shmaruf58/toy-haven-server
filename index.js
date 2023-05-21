@@ -9,9 +9,6 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-
-
-
 //MongoDb.................
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.l9qr6yy.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -33,11 +30,21 @@ async function run() {
     // bookings get by email
     app.get("/bookings", async (req, res) => {
       console.log(req.query.email);
+      const sort = req.query.sort;
       let query = {};
+      const options = {
+        // sort matched documents in descending order by rating
+        sort: {
+          price: sort === "asc" ? 1 : -1,
+        },
+      };
       if (req.query?.email) {
         query = { email: req.query.email };
       }
-      const result = await bookingCollection.find(query).limit(20).toArray();
+      const result = await bookingCollection
+        .find(query, options)
+        .limit(20)
+        .toArray();
       res.send(result);
     });
 
